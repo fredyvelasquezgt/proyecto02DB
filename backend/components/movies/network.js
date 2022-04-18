@@ -5,6 +5,32 @@ const controller = require('./controller')
 
 const passportConfig = require('../../middelwares/passport')
 
+//  Agregar pelicula
+router.post('/nuevo', (req, res) => {
+
+  controller
+    .nuevaPelicula(req.body)
+    .then(value => response.success(req, res, value, 200))
+    .catch(err => response.error(req, res, err, 500, err))
+})
+
+//  actualizar pelicula
+router.post('/actualizar', (req, res) => {
+  controller
+    .actualizarPelicula(req.body)
+    .then(value => response.success(req, res, value, 200))
+    .catch(err => response.error(req, res, err, 500, err))
+})
+
+//  eliminar pelicula
+router.post('/eliminar', (req, res) => {
+  controller
+    .EliminarPelicula(req.body)
+    .then(value => response.success(req, res, value, 200))
+    .catch(err => response.error(req, res, err, 500, err))
+})
+
+
 //  Listar peliculas
 router.post('/list', (req, res) => {
   let { filter } = req.body

@@ -12,6 +12,7 @@ const selectUsersProfiles = filter => {
           `
 }
 
+
 // Inserta un nuevo usuario
 const insertUser = (nombre, correo, clave, tipoCuenta, fecha) => {
   return `insert into usuario (nombre ,correo ,clave ,tipoCuenta,fechaCreacion,intentosFallidos)

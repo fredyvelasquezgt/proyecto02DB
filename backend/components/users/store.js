@@ -3,11 +3,46 @@ const dbconnection = require('../../src/db')
 const connection = dbconnection()
 const model = require('./model')
 
-
 // Listar usuarios
 const listUsers = filter => {
   return new Promise((resolve, reject) => {
     let sql = model.selectUsers(filter)
+    connection.query(sql, (err, result) => {
+      if (err) reject(err)
+      try {
+        resolve(result.rows)
+      } catch (error) {
+        reject(error)
+      }
+    })
+  })
+}
+
+// Editar usuarios
+const editarUsers = params => {
+  let { nombre, correo, idUsuario } = params
+
+  return new Promise((resolve, reject) => {
+    let sql = `UPDATE usuario SET nombre = '${nombre}', correo= '${correo}', intentosFallidos = '0' WHERE idUsuario = '${idUsuario}'`
+    connection.query(sql, (err, result) => {
+      if (err) reject(err)
+      try {
+        resolve(result.rows)
+      } catch (error) {
+        reject(error)
+      }
+    })
+  })
+}
+
+
+
+// localhost:8000/movies/eliminar
+// Eliminar usuario
+const eliminarUsuario = params => {
+  let { idUsuario } = params
+  return new Promise((resolve, reject) => {
+    let sql = `DELETE FROM usuario WHERE idUsuario = '${idUsuario}'`
     connection.query(sql, (err, result) => {
       if (err) reject(err)
       try {
@@ -33,7 +68,6 @@ const listUsersProfiles = filter => {
     })
   })
 }
-
 
 // Crear un nuevo usuario
 const addUser = (nombre, correo, clave, tipoCuenta, fecha) => {
@@ -65,7 +99,6 @@ const updateUsers = (fields, filter) => {
   })
 }
 
-
 // Crear un nuevo perfil para un usuario
 const addUserProfile = (idUsuario, nombre, estado) => {
   return new Promise((resolve, reject) => {
@@ -80,7 +113,6 @@ const addUserProfile = (idUsuario, nombre, estado) => {
     })
   })
 }
-
 
 // Editar estado de un perfil para un usuario
 const updateUserProfileState = (fields, filter) => {
@@ -97,8 +129,6 @@ const updateUserProfileState = (fields, filter) => {
     })
   })
 }
-
-
 
 // Editar perfil para un usuario
 const updateUserProfile = (idPerfil, idUsuario, nombre, estado) => {
@@ -123,5 +153,7 @@ module.exports = {
   addUserProfile,
   updateUserProfile,
   updateUsers,
-  updateUserProfileState
+  updateUserProfileState,
+  editarUsers,
+  eliminarUsuario
 }

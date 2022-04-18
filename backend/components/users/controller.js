@@ -43,6 +43,37 @@ const listUsers = filter => {
   })
 }
 
+
+// Editar usuarios
+const editarUsers = params => {
+  return new Promise((resolve, reject) => {
+    store
+      .editarUsers(params)
+      .then(value => {
+        resolve(value)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+// Eliminar pelicula
+const eliminarUsuario = params => {
+  return new Promise((resolve, reject) => {
+    store
+      .eliminarUsuario(params)
+      .then(value => {
+        resolve(value)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+
+
 // Listar perfiles
 const listUsersProfiles = filter => {
   return new Promise((resolve, reject) => {
@@ -146,5 +177,7 @@ module.exports = {
   addUserProfile,
   updateUserProfile,
   updateUsers,
-  updateUserProfileState
+  updateUserProfileState,
+  editarUsers,
+  eliminarUsuario
 }

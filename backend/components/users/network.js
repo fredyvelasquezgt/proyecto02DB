@@ -25,6 +25,25 @@ router.post('/list', passportConfig.isAuthenticated, (req, res) => {
     .catch(err => response.error(req, res, err, 500, err))
 })
 
+//  Editar usuarios
+router.post('/editar', passportConfig.isAuthenticated, (req, res) => {
+
+  controller
+    .editarUsers(req.body)
+    .then(value => response.success(req, res, value, 200))
+    .catch(err => response.error(req, res, err, 500, err))
+})
+
+//  eliminar usuario
+router.post('/eliminar', (req, res) => {
+  controller
+    .EliminarUsuario(req.body)
+    .then(value => response.success(req, res, value, 200))
+    .catch(err => response.error(req, res, err, 500, err))
+})
+
+
+
 //  Listar perfiles
 router.post('/profiles', (req, res) => {
   let { filter } = req.body

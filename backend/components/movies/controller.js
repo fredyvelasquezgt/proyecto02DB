@@ -4,6 +4,51 @@ const response = require('../../network/responses')
 const moment = require('moment')
 const bcrypt = require('bcryptjs')
 
+// Nueva pelicula
+const actualizarPelicula = params => {
+  return new Promise((resolve, reject) => {
+    store
+      .actualizarPelicula(params)
+      .then(value => {
+        resolve(value)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+
+
+// Eliminar pelicula
+const eliminarPelicula = params => {
+  return new Promise((resolve, reject) => {
+    store
+      .eliminarPelicula(params)
+      .then(value => {
+        resolve(value)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+// Actualizar pelicula
+const nuevaPelicula = params => {
+  return new Promise((resolve, reject) => {
+    store
+      .nuevaPelicula(params)
+      .then(value => {
+        resolve(value)
+      })
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
+
+
 // Listar peliculas
 const listMovies = filter => {
   return new Promise((resolve, reject) => {
@@ -17,8 +62,6 @@ const listMovies = filter => {
       })
   })
 }
-
-
 
 // Listar peliculas favoritas
 const listFavoriteMovies = filter => {
@@ -34,8 +77,6 @@ const listFavoriteMovies = filter => {
   })
 }
 
-
-
 // Listar estado peliculas
 const listWatchingMovies = filter => {
   return new Promise((resolve, reject) => {
@@ -50,7 +91,6 @@ const listWatchingMovies = filter => {
   })
 }
 
-
 // Agregar peliculas favoritas
 const addFavoriteMovies = (idperfil, idpelicula) => {
   return new Promise((resolve, reject) => {
@@ -64,7 +104,6 @@ const addFavoriteMovies = (idperfil, idpelicula) => {
       })
   })
 }
-
 
 // Agregar estado peliculas
 const addWatchingMovies = (idperfil, idpelicula) => {
@@ -87,6 +126,8 @@ module.exports = {
   listFavoriteMovies,
   listWatchingMovies,
   addWatchingMovies,
-  addFavoriteMovies
-
+  addFavoriteMovies,
+  nuevaPelicula,
+  actualizarPelicula,
+  eliminarPelicula
 }
